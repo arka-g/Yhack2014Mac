@@ -9,12 +9,6 @@ $collection = $db->mycol; //
 $findUser = $collection->find();
 echo "Connected to the mongodb server";
 
-} 
-catch (MongoConnectionException $e) {
-  echo "Couldn't conect to the mongodb server";
-}
-
-
 
 if (isset($_POST['username']) && isset($_POST['password'])) 
 {
@@ -39,6 +33,17 @@ if (isset($_POST['username']) && isset($_POST['password']))
     }
 
 }
+
+
+
+} 
+catch (MongoConnectionException $e) {
+  echo "Couldn't conect to the mongodb server";
+}
+
+
+
+
 
 
 ?>
