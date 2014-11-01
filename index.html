@@ -111,13 +111,10 @@
       
     </div><!--row-->
   </div><!--/main-->
-<div class="container">
+    <div class="container">
       <h1>Search for an Artist</h1>
       <hr>
-        <div id="results">
-        </div>
-
-        <div id="album_page"></div>
+        <div id="results"></div>
     </div>
     
 
@@ -189,16 +186,9 @@
 
 	<!-- script references -->
   <script id="results-template" type="text/x-handlebars-template">
-        {{#each albums.items}}
-          <a href="result.html" 
+        {{#each albums.items}} 
           <div style="background-image:url({{images.0.url}})" id="album" value="{{id}}" data-album-id="{{id}}" class="cover"></div>
           <br>
-        {{/each}}
-    </script>
-    <script id="album-page" type="text/x-handlebars-template">
-        {{#each albums.items}}
-          <a href="result.html" 
-          <div style="background-image:url({{images.0.url}})" id="album" value="{{id}}" data-album-id="{{id}}" class="cover"></div>
         {{/each}}
     </script>
 
