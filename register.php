@@ -19,7 +19,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
 {
     $document = array("username" => $_POST['username'],"password" => $_POST['password']);
     $collection->insert($document);
-    header('Location: main.php');
+    header('Location: index.php');
 }
 else{
 

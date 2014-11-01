@@ -1,6 +1,42 @@
-<div class = "main">
-	<h1>You're logged in!</h1>
-</div>
+<?php
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	try{
+		//echo "AS";
+		$connection = new MongoClient();
+		//connect to login db
+		$db = $connection->login;
+
+		//select a collection
+		$collection = $db->mycol;
+
+		//find all the entries in our collection that match that username
+		$findUser = $collection->find();
+
+		// foreach($findUser as $count){
+		// 	echo $count["username"];
+		// }
+		//loop through found results
+		foreach($findUser as $user){
+			$storedUser = $user["username"]; //useless
+			$storedPass = $user["password"];
+			if ($username == $storedUser && $password == $storedPass){
+				//echo "yes you are a user";
+
+			}
+			else{
+//				echo "no you suck";
+			}
+			
+		}
+
+	}
+	catch ( MongoConnectionException $e )
+	{
+	    // if there was an error, we catch and display the problem here
+	    echo $e->getMessage();
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -31,46 +67,22 @@
               <div class="input-group" style="max-width:470px;">
                 <input type="text" class="form-control" placeholder="Search" name="srch-term" id="query">
                 <div class="input-group-btn">
-                  <button class="btn btn-default btn-primary" type="submit" id = "search">Submit</button>
+                  <button class="btn btn-default btn-primary" type="submit" id = "search">Search</button>
                 </div>
               </div>
           </form>
+        <div class="collapse navbar-collapse" id="navbar-collapse2">
           <ul class="nav navbar-nav navbar-right">
-             <li><a href="http://www.bootply.com">Bootply+</a></li>
-             <li>
-             </li>
-             <li><a href="#" id="btnToggle">Raju</a></li>
-             <li><a href="#">Kumar</a></li>
+             <li class="active"><a href="#">Posts</a></li>
+             <li><a href="#loginModal" role="button" data-toggle="modal"><?php echo $username ?></a></li>
+             <li><a href="#aboutModal" role="button" data-toggle="modal">About</a></li>
            </ul>
+        </div>	
         </div>	
      </div>	
    </div>
 </nav>
 
-<div class="navbar navbar-default" id="subnav">
-  <div class = "container">
-    <div class="col-md-12">
-        <div class="navbar-header">
-          
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse2">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          </button>
-      
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-collapse2">
-          <ul class="nav navbar-nav navbar-right">
-             <li class="active"><a href="#">Posts</a></li>
-             <li><a href="#loginModal" role="button" data-toggle="modal">Login</a></li>
-             <li><a href="#aboutModal" role="button" data-toggle="modal">About</a></li>
-           </ul>
-        </div>	
-     </div>	
-   </div>
-   </div>
-</div>
 
 <!--main-->
 <div class="container" id="main">
@@ -130,7 +142,7 @@
     <div class="clearfix"></div>
     <div class = "container">
     <hr>
-    <div class="col-md-12 text-center"><p>Website of Music<br>Rajukumar</p></div>
+    <div class="col-md-12 text-center"><p>Website of Music</p></div>
     <hr>
   </div>
     

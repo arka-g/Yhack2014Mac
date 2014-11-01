@@ -28,46 +28,21 @@
               <div class="input-group" style="max-width:470px;">
                 <input type="text" class="form-control" placeholder="Search" name="srch-term" id="query">
                 <div class="input-group-btn">
-                  <button class="btn btn-default btn-primary" type="submit" id = "search">Submit</button>
+                  <button class="btn btn-default btn-primary" type="submit" id = "search">Search</button>
                 </div>
               </div>
           </form>
-          <ul class="nav navbar-nav navbar-right">
-             <li><a href="http://www.bootply.com">Bootply+</a></li>
-             <li>
-             </li>
-             <li><a href="#" id="btnToggle">Raju</a></li>
-             <li><a href="#">Kumar</a></li>
-           </ul>
-        </div>	
-     </div>	
-   </div>
-</nav>
-
-<div class="navbar navbar-default" id="subnav">
-  <div class = "container">
-    <div class="col-md-12">
-        <div class="navbar-header">
-          
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse2">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          </button>
-      
-        </div>
         <div class="collapse navbar-collapse" id="navbar-collapse2">
           <ul class="nav navbar-nav navbar-right">
              <li class="active"><a href="#">Posts</a></li>
              <li><a href="#loginModal" role="button" data-toggle="modal">Login</a></li>
              <li><a href="#aboutModal" role="button" data-toggle="modal">About</a></li>
            </ul>
+        </div>  
         </div>	
      </div>	
    </div>
-   </div>
-</div>
+</nav>
 
 <!--main-->
 <div class="container" id="main">
@@ -124,7 +99,7 @@
     <div class="clearfix"></div>
     <div class = "container">
     <hr>
-    <div class="col-md-12 text-center"><p>Website of Music<br>Rajukumar</p></div>
+    <div class="col-md-12 text-center"><p>Website of Music</p></div>
     <hr>
   </div>
     
@@ -140,7 +115,7 @@
           <h2 class="text-center"><img src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"><br>Login</h2>
       </div>
       <div class="modal-body">
-          <form class="form col-md-12 center-block" action="authpage.php" method="post">
+          <form class="form col-md-12 center-block" action="main.php" method="post">
             <div class="form-group">
               <input type="text" name="username" class="form-control input-lg" placeholder="Email">
             </div>
