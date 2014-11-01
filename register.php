@@ -6,7 +6,7 @@ $m = new MongoClient(); // create a new mongo client
 //global $db = $m->selectDB("login"); // select our database
 $db = $m->login;
 $collection = $db->mycol; //
-
+$findUser = $collection->find();
 echo "Connected to the mongodb server";
 
 } 
@@ -14,11 +14,11 @@ catch (MongoConnectionException $e) {
   echo "Couldn't conect to the mongodb server";
 }
 
-$findUser = $collection->find();
+
 
 if (isset($_POST['username']) && isset($_POST['password'])) 
 {
-    $uname = $_POST['username'];
+    $uname = $_GET['username'];
     $userfound = False;
 
     foreach($findUser as $user){
@@ -26,13 +26,9 @@ if (isset($_POST['username']) && isset($_POST['password']))
 
             if ($uname == $storedUser){
                 $userfound = True;
-                echo "There is already a user with this username"
+                echo "There is already a user with this username";
                 break;
-
-
             }
-            
-//         
         }
 
     if ($usersfound == False){
@@ -43,9 +39,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
     }
 
 }
-else{
 
-}
 
 ?>
 
