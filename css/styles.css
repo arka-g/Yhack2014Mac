@@ -89,8 +89,8 @@ h3,h4,h5 {
 
 /* template layout*/
 #subnav {
- position:fixed;
  width:100%;
+ position: fixed;
 }
 
 @media (max-width: 768px) {

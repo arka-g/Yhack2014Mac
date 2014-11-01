@@ -1,0 +1,21 @@
+
+#search-form, .form-control {
+}
+
+.cover {
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+    background-size: cover;
+    margin-right: 35px;
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+.cover:hover {
+    cursor: pointer;
+}
+
+.cover.playing {
+    border: 5px solid #e45343;
+}

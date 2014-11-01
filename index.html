@@ -3,14 +3,14 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Bootstrap Google Plus Theme</title>
-		<meta name="generator" content="Bootply" />
+		<title>Music</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<link href="css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/spotify.css">
 	</head>
 	<body>
 <nav class="navbar navbar-fixed-top header">
@@ -18,26 +18,26 @@
  	<div class="col-md-12">
         <div class="navbar-header">
           
-          <a href="#" class="navbar-brand">Bootstrap</a>
+          <a href="#" class="navbar-brand">Raju's Choice</a>
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
           </button>
       
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse1">
-          <form class="navbar-form pull-left">
+          <form class="navbar-form pull-left" id = "search-form">
               <div class="input-group" style="max-width:470px;">
-                <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                <input type="text" class="form-control" placeholder="Search" name="srch-term" id="query">
                 <div class="input-group-btn">
-                  <button class="btn btn-default btn-primary" type="submit">Ok</button>
+                  <button class="btn btn-default btn-primary" type="submit" id = "search">Submit</button>
                 </div>
               </div>
           </form>
           <ul class="nav navbar-nav navbar-right">
-             <li><a href="http://www.bootply.com" target="_ext">Bootply+</a></li>
+             <li><a href="http://www.bootply.com">Bootply+</a></li>
              <li>
              </li>
-             <li><a href="#" id="btnToggle">Ok</a></li>
-             <li><a href="#">Ok</a></li>
+             <li><a href="#" id="btnToggle">Raju</a></li>
+             <li><a href="#">Kumar</a></li>
            </ul>
         </div>	
      </div>	
@@ -48,17 +48,6 @@
   <div class = "container">
     <div class="col-md-12">
         <div class="navbar-header">
-          
-          <a href="#" style="margin-left:15px;" class="navbar-btn btn btn-default btn-plus dropdown-toggle" data-toggle="dropdown"> Home</a>
-          <ul class="nav dropdown-menu">
-              <li><a href="#"><i class="glyphicon glyphicon-user" style="color:#1111dd;"></i> Profile</a></li>
-              <li><a href="#"><i class="glyphicon glyphicon-dashboard" style="color:#0000aa;"></i> Dashboard</a></li>
-              <li><a href="#"><i class="glyphicon glyphicon-inbox" style="color:#11dd11;"></i> Pages</a></li>
-              <li class="nav-divider"></li>
-              <li><a href="#"><i class="glyphicon glyphicon-cog" style="color:#dd1111;"></i> Settings</a></li>
-              <li><a href="#"><i class="glyphicon glyphicon-plus"></i> More..</a></li>
-          </ul>
-          
           
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse2">
           <span class="sr-only">Toggle navigation</span>
@@ -77,6 +66,7 @@
         </div>	
      </div>	
    </div>
+   </div>
 </div>
 
 <!--main-->
@@ -84,7 +74,7 @@
    <div class="row">
    <div class="col-md-4">
         <div class="panel panel-default">
-          <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Bootstrap Examples</h4></div>
+          <div class="panel-heading"><h4>Bootstrap Examples</h4></div>
    			<div class="panel-body">
               <div class="list-group">
                 <a href="http://bootply.com/tagged/modal" class="list-group-item">Modal / Dialog</a>
@@ -95,7 +85,7 @@
 
   <div class="col-md-4">
          <div class="panel panel-default">
-           <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Portlet Heading</h4>
+           <div class="panel-heading"><h4>Portlet Heading</h4>
            </div>
         <div class="panel-body">
               <div class="list-group">
@@ -107,7 +97,7 @@
 
   <div class="col-md-4">
          <div class="panel panel-default">
-           <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Portlet Heading</h4>
+           <div class="panel-heading"><h4>Portlet Heading</h4>
            </div>
    			<div class="panel-body">
               <div class="list-group">
@@ -119,16 +109,27 @@
  
         
       
+    </div><!--row-->
+  </div><!--/main-->
+<div class="container">
+      <h1>Search for an Artist</h1>
+      <hr>
+        <div id="results">
+        </div>
+
+        <div id="album_page"></div>
     </div>
-  </div><!--/row-->
- 
+    
+
+
     <br>
     
     <div class="clearfix"></div>
-      
+    <div class = "container">
     <hr>
-    <div class="col-md-12 text-center"><p>Kenny Dang<br>Rajukumar</p></div>
+    <div class="col-md-12 text-center"><p>Website of Music<br>Rajukumar</p></div>
     <hr>
+  </div>
     
   </div>
 </div><!--/main-->
@@ -158,7 +159,7 @@
       <div class="modal-footer">
           <div class="col-md-12">
           <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-		  </div>	
+      </div>  
       </div>
   </div>
   </div>
@@ -184,8 +185,26 @@
   </div>
   </div>
 </div>
+
 	<!-- script references -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+  <script id="results-template" type="text/x-handlebars-template">
+        {{#each albums.items}}
+          <a href="result.html" 
+          <div style="background-image:url({{images.0.url}})" id="album" value="{{id}}" data-album-id="{{id}}" class="cover"></div>
+          <br>
+        {{/each}}
+    </script>
+    <script id="album-page" type="text/x-handlebars-template">
+        {{#each albums.items}}
+          <a href="result.html" 
+          <div style="background-image:url({{images.0.url}})" id="album" value="{{id}}" data-album-id="{{id}}" class="cover"></div>
+        {{/each}}
+    </script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/spotify.js"></script>
+    <script type="text/javascript" language="javascript" src="js/albumPage.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/scripts.js"></script>
 	</body>
