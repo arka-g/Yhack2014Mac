@@ -1,5 +1,5 @@
 <?php
-
+$uname = $_POST['username'];
 try{
 
 $m = new MongoClient(); // create a new mongo client
@@ -18,7 +18,7 @@ catch (MongoConnectionException $e) {
 
 if (isset($_POST['username']) && isset($_POST['password'])) 
 {
-    $uname = $_GET['username'];
+    
     $userfound = False;
 
     foreach($findUser as $user){
