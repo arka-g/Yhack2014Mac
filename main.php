@@ -1,3 +1,6 @@
+<div class = "main">
+	<h1>You're logged in!</h1>
+</div>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

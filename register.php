@@ -19,6 +19,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
 {
     $document = array("username" => $_POST['username'],"password" => $_POST['password']);
     $collection->insert($document);
+    header('Location: main.php');
 }
 else{
 
@@ -57,12 +58,18 @@ else{
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <form accept-charset="UTF-8" role="form" action="register.php" method="post">                        
-                                        Username:<input type="text" name="username">
-                                        Password:<input type="text" name="password">
+                                <form accept-charset="UTF-8" action="register.php" method="post" role="form" class="form-signin">
+                                    <fieldset>
+                                        <label class="panel-login">
+                                            <div class="login_result"></div>
+                                        </label>
+                                        <input class="form-control" placeholder="Username" name="username" type="text">
+                                        <input class="form-control" placeholder="Password" name="password" type="password">
                                         <br></br>
-                                        <input class="btn btn-lg btn-success btn-block" type="submit" value="Register">
+                                        <input class="btn btn-lg btn-success btn-block" type="submit" id="login" value="Register">
+                                    </fieldset>
                                 </form>
+             
                             </div>
                         </div>
                     </div>
