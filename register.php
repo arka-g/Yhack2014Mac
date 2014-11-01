@@ -1,12 +1,32 @@
-<!-- 
- * parallax_login.html
- * @Author original @msurguy (tw) -> http://bootsnipp.com/snippets/featured/parallax-login-form
- * @Tested on FF && CH
- * @Reworked by @kaptenn_com (tw)
- * @package PARALLAX LOGIN.
--->
+<?php
 
-<html>
+try{
+
+$m = new MongoClient(); // create a new mongo client
+//global $db = $m->selectDB("login"); // select our database
+$db = $m->login;
+$collection = $db->mycol; //
+
+echo "Connected to the mongodb server";
+
+} 
+catch (MongoConnectionException $e) {
+  echo "Couldn't conect to the mongodb server";
+}
+
+
+if (isset($_POST['username']) && isset($_POST['password'])) 
+{
+    $document = array("username" => $_POST['username'],"password" => $_POST['password']);
+    $collection->insert($document);
+}
+else{
+
+}
+
+?>
+
+
 <head>
     <title>Register</title>
     <link rel="stylesheet" type="text/css" href="css/register.css">
@@ -26,7 +46,6 @@
         });
     </script>
     </head>
-        <body>
             <script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
             <div class="container">
                 <div class="row vertical-offset-100">
@@ -38,16 +57,11 @@
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <form accept-charset="UTF-8" role="form" class="form-signin">
-                                    <fieldset>
-                                        <label class="panel-login">
-                                            <div class="login_result"></div>
-                                        </label>
-                                        <input class="form-control" placeholder="Username" id="username" type="text">
-                                        <input class="form-control" placeholder="Password" id="password" type="password">
+                                <form accept-charset="UTF-8" role="form" action="register.php" method="post">                        
+                                        Username:<input type="text" name="username">
+                                        Password:<input type="text" name="password">
                                         <br></br>
-                                        <input class="btn btn-lg btn-success btn-block" type="submit" id="login" value="Register">
-                                    </fieldset>
+                                        <input class="btn btn-lg btn-success btn-block" type="submit" value="Register">
                                 </form>
                             </div>
                         </div>
@@ -55,5 +69,4 @@
                 </div>
             </div>
             <script src = "js/parralax.js"></script>
-        </body>
-</html>
+        
