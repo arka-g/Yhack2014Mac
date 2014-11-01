@@ -14,27 +14,28 @@ catch (MongoConnectionException $e) {
   echo "Couldn't conect to the mongodb server";
 }
 
+$findUser = $collection->find();
 
 if (isset($_POST['username']) && isset($_POST['password'])) 
 {
     $uname = $_POST['username'];
-    $userfound = false;
+    $userfound = False;
 
     foreach($findUser as $user){
-            $storedUser = $user["username"]; //useless
+            $storedUser = $user["username"]; 
 
             if ($uname == $storedUser){
-                $userfound = true;
+                $userfound = True;
                 echo "There is already a user with this username"
                 break;
 
 
             }
             
-//              echo "no you suck";
+//         
         }
 
-    if ($usersfound == false){
+    if ($usersfound == False){
     $document = array("username" => $_POST['username'],"password" => $_POST['password']);
     $collection->insert($document);
     header('Location: index.php');
