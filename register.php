@@ -17,9 +17,30 @@ catch (MongoConnectionException $e) {
 
 if (isset($_POST['username']) && isset($_POST['password'])) 
 {
+    $uname = $_POST['username'];
+    $userfound = false;
+
+    foreach($findUser as $user){
+            $storedUser = $user["username"]; //useless
+
+            if ($uname == $storedUser){
+                $userfound = true;
+                echo "There is already a user with this username"
+                break;
+
+
+            }
+            
+//              echo "no you suck";
+        }
+
+    if ($usersfound == false){
     $document = array("username" => $_POST['username'],"password" => $_POST['password']);
     $collection->insert($document);
     header('Location: index.php');
+
+    }
+
 }
 else{
 
