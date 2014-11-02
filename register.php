@@ -1,33 +1,3 @@
-<?php
-
-try{
-
-$m = new MongoClient(); // create a new mongo client
-//global $db = $m->selectDB("login"); // select our database
-$db = $m->login;
-$collection = $db->mycol; //
-
-echo "Connected to the mongodb server";
-
-} 
-catch (MongoConnectionException $e) {
-  echo "Couldn't conect to the mongodb server";
-}
-
-
-if (isset($_POST['username']) && isset($_POST['password'])) 
-{
-    $document = array("username" => $_POST['username'],"password" => $_POST['password']);
-    $collection->insert($document);
-    header('Location: index.php');
-}
-else{
-
-}
-
-?>
-
-
 <head>
     <title>Register</title>
     <link rel="stylesheet" type="text/css" href="css/register.css">
@@ -58,7 +28,7 @@ else{
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <form accept-charset="UTF-8" action="register.php" method="post" role="form" class="form-signin">
+                                <form accept-charset="UTF-8" action="register-post.php" method="post" role="form" class="form-signin">
                                     <fieldset>
                                         <label class="panel-login">
                                             <div class="login_result"></div>

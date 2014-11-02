@@ -1,43 +1,44 @@
 <?php
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	try{
-		//echo "AS";
-		$connection = new MongoClient();
-		//connect to login db
-		$db = $connection->login;
+try{
+$username = $_POST['username'];
+$password = $_POST['password'];
+$userfound = false;
 
-		//select a collection
-		$collection = $db->mycol;
+$m = new MongoClient(); // create a new mongo client
+//global $db = $m->selectDB("login"); // select our database
+$db = $m->login;
+$collection = $db->mycol; //
+$findUser = $collection->find();
+echo "Connected to the mongodb server";
 
-		//find all the entries in our collection that match that username
-		$findUser = $collection->find();
 
-		// foreach($findUser as $count){
-		// 	echo $count["username"];
-		// }
-		//loop through found results
-		foreach($findUser as $user){
-			$storedUser = $user["username"]; //useless
-			$storedPass = $user["password"];
-			if ($username == $storedUser && $password == $storedPass){
-				//echo "yes you are a user";
+if (isset($_POST['username']) && isset($_POST['password'])) 
+{
+    
+    foreach($findUser as $user){
+            $storedUser = $user["username"]; 
+            $storedPass = $user["password"];
 
-			}
-			else{
-//				echo "no you suck";
-			}
-			
-		}
+            if ($username == $storedUser && $password == $storedPass){
+                $userfound = true;
+                break;
+            } else{}
 
-	}
-	catch ( MongoConnectionException $e )
-	{
-	    // if there was an error, we catch and display the problem here
-	    echo $e->getMessage();
-	}
+        }
+
+    if ($userfound == false){
+      header('Location: index.php');
+
+    } else if ($userfound == true){
+    } else{}
+
+} else {}
+
+} catch (MongoConnectionException $e) {
+  echo "Couldn't conect to the mongodb server";
+}
+
 ?>
-<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -57,7 +58,7 @@
  	<div class="col-md-12">
         <div class="navbar-header">
           
-          <a href="#" class="navbar-brand">Raju's Choice</a>
+          <a class="navbar-brand">Raju's Choice</a>
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
           </button>
       
@@ -74,7 +75,7 @@
         <div class="collapse navbar-collapse" id="navbar-collapse2">
           <ul class="nav navbar-nav navbar-right">
              <li class="active"><a href="#">Posts</a></li>
-             <li><a href="#loginModal" role="button" data-toggle="modal"><?php echo $username ?></a></li>
+             <li><a role="button" data-toggle="modal"><?php echo $username ?> is logged in</a></li>
              <li><a href="#aboutModal" role="button" data-toggle="modal">About</a></li>
            </ul>
         </div>	
@@ -131,8 +132,6 @@
       <hr>
         <div id="results">
         </div>
-
-        <div id="album_page"></div>
     </div>
     
 
@@ -149,37 +148,6 @@
   </div>
 </div><!--/main-->
 
-<!--login modal-->
-<div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-  <div class="modal-content">
-      <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h2 class="text-center"><img src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"><br>Login</h2>
-      </div>
-      <div class="modal-body">
-          <form class="form col-md-12 center-block" action="authpage.php" method="post">
-            <div class="form-group">
-              <input type="text" name="username" class="form-control input-lg" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <input type="password" name="password" class="form-control input-lg" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
-              <span class="btn btn-warning btn-lg btn-block"><a style="color:white" href="register.php">Register</a></span><span> 
-            </span>
-            </div>
-          </form>
-      </div>
-      <div class="modal-footer">
-          <div class="col-md-12">
-          <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-      </div>  
-      </div>
-  </div>
-  </div>
-</div>
 
 
 <!--about modal-->
@@ -205,17 +173,10 @@
 	<!-- script references -->
   <script id="results-template" type="text/x-handlebars-template">
         {{#each albums.items}}
-          <a href="result.html" 
-          <div style="background-image:url({{images.0.url}})" id="album" value="{{id}}" data-album-id="{{id}}" class="cover"></div>
-          <br>
+          <div style="background-image:url({{images.0.url}})" id="album" value="{{id}}" data-album-id="{{id}}" class="cover"></div> 
         {{/each}}
     </script>
-    <script id="album-page" type="text/x-handlebars-template">
-        {{#each albums.items}}
-          <a href="result.html" 
-          <div style="background-image:url({{images.0.url}})" id="album" value="{{id}}" data-album-id="{{id}}" class="cover"></div>
-        {{/each}}
-    </script>
+ 
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script type="text/javascript" language="javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>

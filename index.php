@@ -18,7 +18,7 @@
  	<div class="col-md-12">
         <div class="navbar-header">
           
-          <a href="#" class="navbar-brand">Raju's Choice</a>
+          <a href="index.php" class="navbar-brand">Raju's Choice</a>
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
           </button>
       
@@ -116,17 +116,11 @@
       </div>
       <div class="modal-body">
           <form class="form col-md-12 center-block" action="main.php" method="post">
-            <div class="form-group">
-              <input type="text" name="username" class="form-control input-lg" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <input type="password" name="password" class="form-control input-lg" placeholder="Password">
-            </div>
-            <div class="form-group">
+                <input class="form-control" placeholder="Username" name="username" type="text">
+                <input class="form-control" placeholder="Password" name="password" type="text">
+            
               <button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
-              <span class="btn btn-warning btn-lg btn-block"><a style="color:white" href="register.php">Register</a></span><span> 
-            </span>
-            </div>
+              <span class="btn btn-warning btn-lg btn-block"><a style="color:white" href="register.php">Register</a></span> 
           </form>
       </div>
       <div class="modal-footer">

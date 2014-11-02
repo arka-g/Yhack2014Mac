@@ -65,7 +65,7 @@ results.addEventListener('click', function(e) {
         var json = "http://ws.spotify.com/lookup/1/.json?uri=spotify:album:"+target.getAttribute("value");
         console.log(json);
         var json_obj = JSON.parse(Get(json));
-        artistInfo.innerHTML = "<b>"+json_obj.album.name+"</b><br>"+json_obj.album.artist+"<br><br>"+"****/5 Star Rating "
+        artistInfo.innerHTML = "<b>"+json_obj.album.name+"</b><br>"+json_obj.album.artist+"<br><br>"+"****/5 Star Rating ";
         // console.log("this is the author name: "+json_obj.album.name);
     }
 });
