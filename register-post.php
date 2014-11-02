@@ -3,7 +3,7 @@ $uname = $_POST['username'];
 $userfound = false;
 
 try{
-
+error_reporting(0);
 $m = new MongoClient(); // create a new mongo client
 //global $db = $m->selectDB("login"); // select our database
 $db = $m->login;
@@ -25,7 +25,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
         }
 
     if ($userfound == false){
-    $document = array("username" => $_POST['username'],"password" => $_POST['password']);
+    $document = array("username" => $_POST['username'],"password" => $_POST['password'],"value" => []);
     $collection->insert($document);
     header('Location: index.php');
 

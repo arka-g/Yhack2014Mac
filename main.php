@@ -3,7 +3,7 @@ try{
 $username = $_POST['username'];
 $password = $_POST['password'];
 $userfound = false;
-
+error_reporting(0);
 $m = new MongoClient(); // create a new mongo client
 //global $db = $m->selectDB("login"); // select our database
 $db = $m->login;
@@ -34,6 +34,12 @@ if (isset($_POST['username']) && isset($_POST['password']))
 
 } else {}
 
+  $findreal = $collection->find(array('username'=>$username));
+  foreach ($findreal as $key) {
+  //var_dump($key["value"]);  
+  }
+  $lastarr = $key["value"];
+
 } catch (MongoConnectionException $e) {
   echo "Couldn't conect to the mongodb server";
 }
@@ -51,8 +57,12 @@ if (isset($_POST['username']) && isset($_POST['password']))
 		<![endif]-->
 		<link href="css/styles.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/spotify.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
 	</head>
 	<body>
+
+
 <nav class="navbar navbar-fixed-top header">
   <div class = "container">
  	<div class="col-md-12">
@@ -68,7 +78,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
               <div class="input-group" style="max-width:470px;">
                 <input type="text" class="form-control" placeholder="Search" name="srch-term" id="query">
                 <div class="input-group-btn">
-                  <button class="btn btn-default btn-primary" type="submit" id = "search">Search</button>
+                  <button class="btn btn-default btn-primary" type="submit" id = "search" disabled>Search</button>
                 </div>
               </div>
           </form>
@@ -84,53 +94,60 @@ if (isset($_POST['username']) && isset($_POST['password']))
    </div>
 </nav>
 
+<div id = "usernamecurrent">
+  <? echo $username?>
+</div>
 
 <!--main-->
 <div class="container" id="main">
    <div class="row">
    <div class="col-md-4">
         <div class="panel panel-default">
-          <div class="panel-heading"><h4>Bootstrap Examples</h4></div>
+          <div class="panel-heading"><h4>Top Artist</h4></div>
    			<div class="panel-body">
               <div class="list-group">
-                <a href="http://bootply.com/tagged/modal" class="list-group-item">Modal / Dialog</a>
+                <div id = "artstuf_0" class="list-group-item" style="display:none"></div>
             </div>
    		</div>
 	</div>
 </div>
 
   <div class="col-md-4">
-         <div class="panel panel-default">
-           <div class="panel-heading"><h4>Portlet Heading</h4>
+        <div class="panel panel-default">
+           <div class="panel-heading"><h4>Liked Albums</h4>
            </div>
+
         <div class="panel-body">
-              <div class="list-group">
-                <a href="http://bootply.com/tagged/modal" class="list-group-item">Modal / Dialog</a>
-            </div>
-        </div>
+              <div id="listgroup2">
+                <div id = "stuff_0" class="list-group-item" style="display:none"></div>
+             </div>
       </div> 
+    </div>
     </div>
 
   <div class="col-md-4">
          <div class="panel panel-default">
-           <div class="panel-heading"><h4>Portlet Heading</h4>
+           <div class="panel-heading"><h4>Liked Artists</h4>
            </div>
    			<div class="panel-body">
-              <div class="list-group">
-                <a href="http://bootply.com/tagged/modal" class="list-group-item">Modal / Dialog</a>
+              <div class="list-group3">
+                <div id = "artstuff_0" class="list-group-item" style="display:none"></div>
             </div>
         </div>
       </div>
   </div>
- 
-        
-      
-    </div><!--row-->
+</div><!--row-->
   </div><!--/main-->
+
 <div class="container">
       <h1>Search for an Artist</h1>
       <hr>
         <div id="results">
+        </div>
+        <div id= "comments" style = "display:none;">
+          <ul>
+          <li>dsad</li>
+          </ul>
         </div>
     </div>
     
@@ -169,6 +186,36 @@ if (isset($_POST['username']) && isset($_POST['password']))
   </div>
   </div>
 </div>
+
+    <script>
+      function Get(yourUrl){
+        var Httpreq = new XMLHttpRequest(); // a new request
+        Httpreq.open("GET",yourUrl,false);
+        Httpreq.send(null);
+        return Httpreq.responseText;
+      }
+
+      var ar = <?php echo json_encode($lastarr) ?>;
+      console.log(ar);
+
+      for(i = 0; i<ar.length;i++)
+      {
+          var json = "http://ws.spotify.com/lookup/1/.json?uri=spotify:album:"+ar[i];
+          var json_obj = JSON.parse(Get(json));
+          $fsf = json_obj.album.name;
+          $art = json_obj.album.artist;
+          //$("#listgroup2").append('<div>'+$(fsf)+'</div>');
+          console.log($fsf);
+           var d_id = i+1;
+          $("<div class='list-group-item' id='stuff_"+d_id+"'>"+$fsf+"</div>").insertAfter("#stuff_"+i);
+          $("<div class='list-group-item' id='artstuff_"+d_id+"'>"+$art+"</div>").insertAfter("#artstuff_"+i);
+          $("<div class='list-group-item' id='artstuf_"+d_id+"'>"+$art+"</div>").insertAfter("#artstuf_"+i);
+
+          // var d_i = i+1;
+          // $("#stuff_0").replaceWith($("fsf"));
+      }
+
+    </script>
 
 	<!-- script references -->
   <script id="results-template" type="text/x-handlebars-template">

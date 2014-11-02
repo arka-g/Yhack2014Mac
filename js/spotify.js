@@ -2,6 +2,8 @@
 var templateSource = document.getElementById('results-template').innerHTML,
     template = Handlebars.compile(templateSource),
     resultsPlaceholder = document.getElementById('results'),
+    commentsPlaceholder = document.getElementById('comments'),
+    topalbumsPlaceholder =document.getElementById('listgroup2'),
     playingCssClass = 'playing',
     audioObject = null;
 
@@ -26,6 +28,12 @@ var searchAlbums = function (query) {
         }
     });
 };
+
+// var postLikes = function(query){
+//     $.ajax({
+//         type: "GET"
+//     })
+// };
 // function getJSONP(url, success) {
 //     var ud = '_' + +new Date,
 //         script = document.createElement('script'),
@@ -57,18 +65,38 @@ results.addEventListener('click', function(e) {
         resultsPlaceholder.appendChild(albumBox);
         albumBox.setAttribute('style', target.getAttribute('style'));
         albumBox.style.float = "left";
-        albumBox.style.padding = "0px 0px 0px 30px" 
         albumBox.setAttribute('value', target.getAttribute('value'));
+        albumBox.setAttribute('id', 'albuminfo');
         var artistInfo = document.createElement('div');
         artistInfo.className = 'artistInfo';
         resultsPlaceholder.appendChild(artistInfo);
+
         var json = "http://ws.spotify.com/lookup/1/.json?uri=spotify:album:"+target.getAttribute("value");
         console.log(json);
         var json_obj = JSON.parse(Get(json));
-        artistInfo.innerHTML = "<b>"+json_obj.album.name+"</b><br>"+json_obj.album.artist+"<br><br>"+"****/5 Star Rating ";
+        artistInfo.innerHTML = "<b>"+json_obj.album.name+"</b><br>"+json_obj.album.artist+"<br><br>"+"****/5 Star Rating<br><br>";
+        $('.artistInfo', '#results').append("<input type='button' class='like-btn' value='Like' onClick=likePost()>");
+        $('#comments').css('display','block');
+
         // console.log("this is the author name: "+json_obj.album.name);
     }
 });
+function likedAlbum(arr){
+    for(i = 0; i<arr.length;i++){
+        var json = "http://ws.spotify.com/lookup/1/.json?uri=spotify:album:"+arr[i];
+        $fsf = json_obj.album.name;
+        $("#listgroup2").append('<div>'+$(fsf)+'</div>');
+    }
+
+}
+
+function likePost(value){
+    var  x = $('#albuminfo').attr('value');
+    var username = document.getElementById('usernamecurrent').innerHTML;
+    var moduser = username.replace(/\s+/g, '');
+    window.location.href="like-post.php?y="+x+username;
+}
+
 var comments = document.createElement('div');
     comments.className = 'cover';
     comments.innerHTML = "OMG DIS ALBUM IZ AWESOME";

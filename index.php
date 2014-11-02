@@ -28,7 +28,7 @@
               <div class="input-group" style="max-width:470px;">
                 <input type="text" class="form-control" placeholder="Search" name="srch-term" id="query">
                 <div class="input-group-btn">
-                  <button class="btn btn-default btn-primary" type="submit" id = "search">Search</button>
+                  <button class="btn btn-default btn-primary" type="submit" id = "search" disabled>Search</button>
                 </div>
               </div>
           </form>
@@ -47,40 +47,17 @@
 <!--main-->
 <div class="container" id="main">
    <div class="row">
-   <div class="col-md-4">
+   <div class="col-md-12">
         <div class="panel panel-default">
-          <div class="panel-heading"><h4>Bootstrap Examples</h4></div>
+          <div class="panel-heading"><h4>About Raju's Choice</h4></div>
    			<div class="panel-body">
               <div class="list-group">
-                <a href="http://bootply.com/tagged/modal" class="list-group-item">Modal / Dialog</a>
+                <a href="http://bootply.com/tagged/modal" class="list-group-item">Raju and the Gang</a>
             </div>
    		</div>
 	</div>
 </div>
 
-  <div class="col-md-4">
-         <div class="panel panel-default">
-           <div class="panel-heading"><h4>Portlet Heading</h4>
-           </div>
-        <div class="panel-body">
-              <div class="list-group">
-                <a href="http://bootply.com/tagged/modal" class="list-group-item">Modal / Dialog</a>
-            </div>
-        </div>
-      </div> 
-    </div>
-
-  <div class="col-md-4">
-         <div class="panel panel-default">
-           <div class="panel-heading"><h4>Portlet Heading</h4>
-           </div>
-   			<div class="panel-body">
-              <div class="list-group">
-                <a href="http://bootply.com/tagged/modal" class="list-group-item">Modal / Dialog</a>
-            </div>
-        </div>
-      </div>
-  </div>
  
         
       
@@ -90,6 +67,7 @@
       <h1>Search for an Artist</h1>
       <hr>
         <div id="results"></div>
+        <div id="comments"></div>
     </div>
     
 
